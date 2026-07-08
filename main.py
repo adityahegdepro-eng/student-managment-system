@@ -1,4 +1,22 @@
-system={}
+import json
+def save_data():
+    with open("student.json","w") as file:
+        json.dump(system,file,indent=4)
+
+def load_data():
+    try:
+        with open("student.json","r") as file:
+            system=json.load(file)
+        
+        return system
+    except FileNotFoundError:
+        print("student.json not found \n starting with empty database")
+        return {}
+    except ValueError:
+        print("student.json is invalid\n starting with empty database")
+        return {}
+       
+system=load_data()
 total_classes=25
 def fill_details():
     usn=input("enter the usn:")
@@ -12,7 +30,7 @@ def fill_details():
     try:
         att_cls=int(input("enter number of classes student attended(0-25):"))
         system[usn]["attended"]=att_cls
-    except :
+    except ValueError:
         print("enter valid input")
     
     else:    
@@ -23,8 +41,25 @@ def fill_details():
             system[usn]["assignment_status"]="submitted"
         else:
             print("enter valid option") 
+    save_data()
 
-        
+def attendence_calculator(attended):
+    atd_perc=(attended/total_classes)*100 
+    return atd_perc
+
+def show_student(usn):
+
+    if usn in system: 
+        print("name :",system[usn]["name"])
+        print("attended classes :",system[usn]["attended"])
+        print("total classes :",total_classes)
+        att_cls=system[usn]["attended"]
+        attendence_percentage=attendence_calculator(att_cls)
+        print(attendence_percentage,"%")
+        print("assignment status:",system[usn]["assignment_status"])
+                                       
+    else:
+        print("🔸enter valid usn🔸")       
 
 while True:
     print("----------------------")
@@ -40,22 +75,16 @@ while True:
         
     elif choice==2:
         usn=input("enter usn of the students:") 
-        if usn in system: 
-                print("name :",system[usn]["name"])
-                print("attended classes :",system[usn]["attended"])
-                print("total classes :",total_classes)
-                print("attendance percentage:",(system[usn]["attended"]/total_classes)*100,"%")
-                print("assignment status:",system[usn]["assignment_status"])
-                
-                
-                
-        else:
-                print("🔸enter valid usn🔸")      
+        show_student(usn)
+
     elif choice==3:
         if system!={}:
             print("all students:")
             for usn in system:
-                print(usn,"=",system[usn]["name"])
+                print(usn,":",system[usn]["name"])
+                att_cls=system[usn]["attended"]
+                attendence_percentage=attendence_calculator(att_cls)
+                print(attendence_percentage,"%")
         else:
             print("🔸please add students first to view🔸")
     elif choice==4:
@@ -66,8 +95,6 @@ while True:
             choice=int(input("enter choice(1 or 2)"))
             if choice==1:
                 system[usn]["attended"]=int(input("new attendence"))
-                att_perc=(system[usn]["attended"]/total_classes)*100 
-                system[usn]["attendance %"]=att_perc 
                 print("attendence update success")
             elif choice==2:
                 ass_st=int(input("1.assignment pending  /n  2.assignment submitted"))
@@ -79,6 +106,8 @@ while True:
                     print("enter valid option") 
         else:
             print("enter existing usn")
+    
+        save_data()
        
     elif choice==5:
         usn=input("enter usn of student to be deleted")
@@ -87,5 +116,10 @@ while True:
             print("Student deleted successfully")
         else:
             print("enter existing usn")
+        
+        save_data()
+        
     elif choice==6:
         break
+
+
