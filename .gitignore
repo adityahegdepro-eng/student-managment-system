@@ -1,0 +1,6 @@
+theory_used.txt
+trial.py
+__pycache__/
+*.pyc
+.vscode/
+.idea/
