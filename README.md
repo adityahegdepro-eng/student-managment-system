@@ -30,6 +30,15 @@ This project is built for learning:
 - Git & GitHub
 
 ---
+V2 - JSON Persistence
+---
+## Future Roadmap
+
+- V3 - OOP Refactor
+- V4 - Professional Folder Structure
+- V5 - MySQL Integration
+- V6 - FastAPI Backend
+- V7 - Streamlit UI
 
 ## How to Run
 
