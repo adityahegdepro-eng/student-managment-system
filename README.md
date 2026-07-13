@@ -30,11 +30,31 @@ This project is built for learning:
 - Git & GitHub
 
 ---
-V2 - JSON Persistence
+
+## Versions
+
+### V1
+- CLI application
+- CRUD operations
+- Attendance tracking
+- Assignment tracking
+
+### V2
+- JSON persistence
+- Data survives restarts
+- File handling
+
+### V3
+- Refactored using Object-Oriented Programming
+- Student class
+- StudentManager class
+- Modular architecture
+- JSON serialization/deserialization
 ---
+
 ## Future Roadmap
 
-- V3 - OOP Refactor
+
 - V4 - Professional Folder Structure
 - V5 - MySQL Integration
 - V6 - FastAPI Backend
