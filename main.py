@@ -1,8 +1,11 @@
-import json
+
 from student import Student 
 from student_manager import StudentManager
+from database import DatabaseManager
 
-manager=StudentManager()
+db=DatabaseManager()
+manager=StudentManager(db)
+
 
 while True:
     print("----------------------")
@@ -52,4 +55,5 @@ while True:
         manager.delete_student(usn)
         
     elif choice==6:
+        db.close()
         break

@@ -1,69 +1,125 @@
 # Student Management System
 
-## Project Description
-A simple Python-based student management system that helps track:
+A command-line based Student Management System built in Python to learn software engineering fundamentals through incremental development.
 
-- Student names
-- Attendance percentage
-- Assignment status
+## Project Overview
 
-This project is built for learning:
-- Python
-- Logic building
-- Project structure
-- GitHub workflow
+This project was developed in multiple versions, with each version introducing new software engineering concepts while preserving the existing functionality.
+
+The goal of this project is to understand how real software evolves from a simple program into a modular backend application.
 
 ---
 
 ## Features
 
-- Add student details
-- Calculate attendance percentage
-- View assignment status
+* Add Student
+* View Student
+* View All Students
+* Update Attendance
+* Update Assignment Status
+* Delete Student
+* Duplicate USN Validation
+* MySQL Database Integration
 
 ---
 
 ## Technologies Used
 
-- Python
-- VS Code
-- Git & GitHub
+* Python
+* MySQL
+* MySQL Connector for Python
+* Object-Oriented Programming (OOP)
 
 ---
 
-## Versions
+## Project Structure
 
-### V1
-- CLI application
-- CRUD operations
-- Attendance tracking
-- Assignment tracking
+```
+Student-Management-System/
+│
+├── main.py
+├── student.py
+├── student_manager.py
+├── database.py
+├── README.md
+└── .gitignore
+```
 
-### V2
-- JSON persistence
-- Data survives restarts
-- File handling
-
-### V3
-- Refactored using Object-Oriented Programming
-- Student class
-- StudentManager class
-- Modular architecture
-- JSON serialization/deserialization
 ---
 
-## Future Roadmap
+## Project Evolution
 
+### Version 1.0
 
-- V4 - Professional Folder Structure
-- V5 - MySQL Integration
-- V6 - FastAPI Backend
-- V7 - Streamlit UI
+* CLI CRUD Application
+* Dictionaries
+* Functions
+* Exception Handling
 
-## How to Run
+### Version 2.0
 
-1. Open project folder in VS Code
-2. Run the following command in terminal:
+* JSON Persistence
+* File Handling
+* Serialization
 
-```bash
-python main.py
+### Version 3.0
+
+* Object-Oriented Programming
+* Student Class
+* StudentManager Class
+* Modular Design
+
+### Version 4.0
+
+* MySQL Integration
+* Database Layer
+* SQL CRUD Operations
+* Separation of Concerns
+
+---
+
+## Architecture
+
+```
+User
+   ↓
+main.py
+   ↓
+StudentManager
+   ↓
+Database
+   ↓
+MySQL
+```
+
+---
+
+## Learning Outcomes
+
+Through this project, I learned:
+
+* Python OOP
+* Clean code organization
+* Separation of responsibilities
+* JSON serialization
+* SQL CRUD operations
+* Database integration using MySQL Connector
+* Layered application architecture
+
+---
+
+## Future Improvements
+
+* Streamlit UI
+* REST API using FastAPI
+* Deployment
+* Documentation improvements
+
+---
+
+## Author
+
+Aditya Hegde
+Computer Science Engineering
+Bangalore Institute of Technology
+

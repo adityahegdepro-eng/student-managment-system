@@ -1,79 +1,74 @@
-import json
+
 from student import Student
 class StudentManager:
-    def __init__(self):
-        self.students={}
-        self.load_data()
+    def __init__(self,database):
+        self.database=database
+        
     
     def add_student(self,student):
-        if student.usn in self.students:
+        if self.database.student_exist(student.usn):
             print("usn exists")
-        else:
-            self.students[student.usn] = student
-            self.save_data()
-            print("student added succesfully")
+            return
+        
+        self.database.insert_students(student)
+        print("student added succesfully")
+
     def show_student(self,usn):
-        if usn in self.students:
-            self.students[usn].display()
-        else:
-            print("student not found")
+        student=self.database.get_student(usn)
+        if student is None:
+            print("student doesnt exist")
+            
+        stu_obj=Student(student[0],student[1],student[2],student[3])
+        stu_obj.display()
+
+        
     def show_all_students(self):
-        if self.students:
-            for student in self.students.values():
-                student.display()
+        
+        students=self.database.get_all_students()
+        if students:
+            for student in students:
+                stu_obj=Student(student[0],student[1],student[2],student[3])
+                stu_obj.display()
         else:
             print("no students found")
     def update_student(self, usn):
-        if usn in self.students:
-            student=self.students[usn]
-            print("1.update attendence")
-            print("2.update assignment status")
-            choice=int(input("enter choice(1 or 2)"))
-            if choice==1:
-                attended=int(input("enter new attendnece"))
-                student.update_attendence(attended)
-                self.save_data()
-            elif choice==2:
-                assignment_status=input("'submitted' or 'pending'  /n")
-                student.update_assignment(assignment_status)
-                self.save_data()
-        else:
+        student=self.database.get_student(usn)
+
+        if student is None:
             print("student not found")
+            return 
+        
+        print("1.update attendence")
+        print("2.update assignment status")
+        choice=int(input("enter choice(1 or 2)"))
+        if choice==1:
+            attended=int(input("enter new attendnece"))                
+            self.database.update_attendence(attended,usn)
+            print("updated succesfully")
+        elif choice==2:
+            try:
+                print("enter updated assignment stauts")
+                choice=int(input("1.submitted \n2.pending \nenter your choice"))
+                if choice==1:
+                    assignment_status="submitted"
+                elif choice==2:
+                    assignment_status="pending"
+                else:
+                    print("choice must be 1 or 2")
+
+            except ValueError:
+                print("enter valid assginment status")
+
+            self.database.update_assignment(assignment_status,usn)
+            print("updated succesfully")
+
 
     def delete_student(self, usn):
-        if usn in self.students:
-            del self.students[usn]
-            self.save_data()
-            print("deleted succesfully")
-        else:
-            print("student not found")  
+        student=self.database.get_student(usn)
 
-    def save_data(self):
-        student_dict={}
-        for student in self.students.values():
-            student_dict[student.usn]=student.to_dict()
-        with open("student.json","w") as file:
-            json.dump(student_dict,file,indent=4)
+        if student is None:
+            print("student not found")
+            return   
         
-
-    def load_data(self):
-        try:
-            with open("student.json","r") as file:
-                student_dict=json.load(file)
-                for usn,student_data in student_dict.items():
-                    student=Student(
-                        student_data["usn"],
-                        student_data["name"],
-                        student_data["attended"],
-                        student_data["assignment_status"]
-                    )
-                    self.students[usn]=student
-            
-
-        except FileNotFoundError:
-            print("student.json not found \n starting with empty database")
-            return {}
-        except ValueError:
-            print("student.json is invalid\n starting with empty database")
-            return {}
-        
+        self.database.delete_student(usn)
+        print("student deleted succesfully")

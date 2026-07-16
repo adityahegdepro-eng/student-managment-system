@@ -19,17 +19,3 @@ class Student:
         print("assignment_status:",self.assignment_status)
         print("attendence percentage:",self.attendence_calculator())
     
-    def update_attendence(self,attended):
-        self.attended=attended
-        print("attendence updated succesfully")
-    
-    def update_assignment(self,assignment_status):
-        self.assignment_status=assignment_status
-    
-    def to_dict(self):
-        student_dict={}
-        student_dict["usn"]=self.usn
-        student_dict["name"]=self.name
-        student_dict["attended"]=self.attended
-        student_dict["assignment_status"]=self.assignment_status
-        return student_dict
