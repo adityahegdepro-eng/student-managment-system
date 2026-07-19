@@ -8,29 +8,33 @@ class StudentManager:
     def add_student(self,student):
         if self.database.student_exist(student.usn):
             print("usn exists")
-            return
+            return 
         
         self.database.insert_students(student)
-        print("student added succesfully")
+        return True
 
     def show_student(self,usn):
         student=self.database.get_student(usn)
-        if student is None:
-            print("student doesnt exist")
+        
+        if student :
+            stu_obj=Student(student[0],student[1],student[2],student[3])
+            return stu_obj
+        else:
+            return None
             
-        stu_obj=Student(student[0],student[1],student[2],student[3])
-        stu_obj.display()
 
         
     def show_all_students(self):
+        students = self.database.get_all_students()
+        print(students)
+        students_list = []
+        for student in students:
+            stu_obj = Student(student[0], student[1], student[2], student[3])
+            students_list.append(stu_obj)
+            print(students_list)
+        return students_list
+    
         
-        students=self.database.get_all_students()
-        if students:
-            for student in students:
-                stu_obj=Student(student[0],student[1],student[2],student[3])
-                stu_obj.display()
-        else:
-            print("no students found")
     def update_student(self, usn):
         student=self.database.get_student(usn)
 

@@ -9,7 +9,8 @@ class DatabaseManager:
             password="password@root",
             database="student_management"
         )
-        self.cursor = self.connection.cursor()
+        
+        self.cursor = self.connection.cursor(buffered=True)
 
     def insert_students(self,student):
         query = """

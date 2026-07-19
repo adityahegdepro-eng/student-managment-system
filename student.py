@@ -19,3 +19,11 @@ class Student:
         print("assignment_status:",self.assignment_status)
         print("attendence percentage:",self.attendence_calculator())
     
+    def to_dict(self):
+        return {
+            "USN": self.usn,
+            "Name": self.name,
+            "Attended": self.attended,
+            "Assignment Status": self.assignment_status,
+            "Attendance %": round(self.attendence_calculator(), 2)
+        }
