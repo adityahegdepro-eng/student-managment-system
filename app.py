@@ -11,7 +11,7 @@ st.title("🧑‍🎓 student management system")
 st.write("welcome to student management system")
 
 st.header("ADD STUDENT")
-usn=st.text_input("enter new student usn")
+usn=st.text_input("enter new student usn",key="add_usn")
 name=st.text_input("enter name")
 attended=st.number_input("enter number of classes attended",value=0,step=1,max_value=26)
 assignment_status=st.selectbox("assignment status",["submitted","pending"])
@@ -30,7 +30,7 @@ if st.button("Add student"):
 
 
 st.header("VIEW STUDENT")
-search_usn=st.text_input("search student usn ")
+search_usn=st.text_input("enter student usn ",key="search_usn")
 if st.button("search for student"):
      
     if not search_usn:
@@ -61,3 +61,32 @@ if st.button("show al students"):
     else:
         rows = [student.to_dict() for student in students]
         st.dataframe(rows)
+
+st.header("UPDATE STUDENTS ")
+update_usn=st.text_input(" enter student usn",key="update_usn")
+if st.button("load student"):
+    student=manager.show_student(update_usn)
+    if student is None:
+        st.error("student not found")
+    else:
+        st.session_state["student"]=student
+if "student" in st.session_state:
+        student=st.session_state["student"]
+        st.success("student loaded succesfully")
+        st.write("student name:",student.name)
+        updated_attended=st.number_input("attended classes : ",value=student.attended,max_value=26)
+        options=["submitted","pending"]
+        updated_assignment=st.selectbox("assignment status:",
+                     options,
+                     index=options.index(student.assignment_status)
+                     )
+        if st.button("UPDATE STUDENT"):
+            x=manager.update_student(student.usn,updated_attended,updated_assignment)
+            if x:
+                st.success("student updated succesully")
+                del st.session_state["student"]
+            else:
+                st.error("something went wrong")
+
+    
+        

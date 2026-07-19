@@ -35,36 +35,16 @@ class StudentManager:
         return students_list
     
         
-    def update_student(self, usn):
+    def update_student(self, usn,attended,assignment_status):
         student=self.database.get_student(usn)
 
         if student is None:
-            print("student not found")
-            return 
+            return None
         
-        print("1.update attendence")
-        print("2.update assignment status")
-        choice=int(input("enter choice(1 or 2)"))
-        if choice==1:
-            attended=int(input("enter new attendnece"))                
+        else:                
             self.database.update_attendence(attended,usn)
-            print("updated succesfully")
-        elif choice==2:
-            try:
-                print("enter updated assignment stauts")
-                choice=int(input("1.submitted \n2.pending \nenter your choice"))
-                if choice==1:
-                    assignment_status="submitted"
-                elif choice==2:
-                    assignment_status="pending"
-                else:
-                    print("choice must be 1 or 2")
-
-            except ValueError:
-                print("enter valid assginment status")
-
             self.database.update_assignment(assignment_status,usn)
-            print("updated succesfully")
+            return True
 
 
     def delete_student(self, usn):
