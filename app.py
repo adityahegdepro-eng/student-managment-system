@@ -47,7 +47,7 @@ if st.button("search for student"):
             st.write("attended classes ",student.attended)
             st.metric(
                 "Attendance %",
-                round(student.attendence_calculator(),2)
+                round(student.attendance_calculator(),2)
                 )
             st.write("assignment status",student.assignment_status)
              
@@ -69,9 +69,9 @@ if st.button("load student"):
     if student is None:
         st.error("student not found")
     else:
-        st.session_state["student"]=student
-if "student" in st.session_state:
-        student=st.session_state["student"]
+        st.session_state["update_student"]=student
+if "update_student" in st.session_state:
+        student=st.session_state["update_student"]
         st.success("student loaded succesfully")
         st.write("student name:",student.name)
         updated_attended=st.number_input("attended classes : ",value=student.attended,max_value=26)
@@ -84,9 +84,33 @@ if "student" in st.session_state:
             x=manager.update_student(student.usn,updated_attended,updated_assignment)
             if x:
                 st.success("student updated succesully")
-                del st.session_state["student"]
+                del st.session_state["update_student"]
             else:
                 st.error("something went wrong")
 
     
+st.header("DELETE STUDENT")
+delete_usn=st.text_input("enter student usn ",key="delete_usn")
+if st.button("load "):
+    student=manager.show_student(delete_usn)
+    if student is None:
+        if "delete_student" in st.session_state:
+            del st.session_state["delete_student"]
+        st.error(" ❌❌student not found")
         
+    else:
+        st.session_state["delete_student"]=student
+if "delete_student" in st.session_state:
+    student=st.session_state["delete_student"]
+    st.success("student loaded succesfully")
+    st.write("student usn",student.usn)
+    st.write("student name",student.name)
+    st.write("Attended Classes:", student.attended)
+    st.write("Assignment Status:", student.assignment_status)
+    if st.button("delete student"):
+        x=manager.delete_student(student.usn)
+        if x:
+            st.success("student deleted from database")
+            del st.session_state["delete_student"]
+        else:
+            st.error("student deletion fsiled")

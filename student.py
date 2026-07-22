@@ -8,7 +8,7 @@ class Student:
         self.assignment_status=assignment_status
     
 
-    def attendence_calculator(self):
+    def attendance_calculator(self):
         atd_perc=(self.attended/total_classes)*100 
         return atd_perc
 
@@ -17,7 +17,7 @@ class Student:
         print("name:",self.name)
         print("attended:",self.attended)
         print("assignment_status:",self.assignment_status)
-        print("attendence percentage:",self.attendence_calculator())
+        print("attendance percentage:",self.attendance_calculator())
     
     def to_dict(self):
         return {
@@ -25,5 +25,5 @@ class Student:
             "Name": self.name,
             "Attended": self.attended,
             "Assignment Status": self.assignment_status,
-            "Attendance %": round(self.attendence_calculator(), 2)
+            "Attendance %": round(self.attendance_calculator(), 2)
         }

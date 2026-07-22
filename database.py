@@ -37,7 +37,7 @@ class DatabaseManager:
         rows = self.cursor.fetchall()
         return rows
     
-    def update_attendence(self,attended,usn):
+    def update_attendance(self,attended,usn):
         query="UPDATE student SET attended=%s WHERE usn=%s"
         self.cursor.execute(query,(attended,usn))
         self.connection.commit()

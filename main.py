@@ -23,7 +23,7 @@ while True:
             attended=int(input("attended classes:"))
 
         except ValueError:
-            print("enter valid attendence")
+            print("enter valid attendance")
         try:
             choice=int(input("1.submitted \n2.pending \nenter your choice"))
             if choice==1:

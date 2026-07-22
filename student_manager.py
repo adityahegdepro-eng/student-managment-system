@@ -42,17 +42,14 @@ class StudentManager:
             return None
         
         else:                
-            self.database.update_attendence(attended,usn)
+            self.database.update_attendance(attended,usn)
             self.database.update_assignment(assignment_status,usn)
             return True
 
 
     def delete_student(self, usn):
         student=self.database.get_student(usn)
-
         if student is None:
-            print("student not found")
-            return   
-        
+            return False 
         self.database.delete_student(usn)
-        print("student deleted succesfully")
+        return True
