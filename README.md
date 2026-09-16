@@ -252,7 +252,7 @@ self.connection = mysql.connector.connect(
 )
 ```
 
-> Do not commit your real database password to GitHub. Use environment variables for production projects.
+
 
 ### 4. Run the application
 
