@@ -6,7 +6,7 @@ class DatabaseManager:
             host="localhost",
             user="root",
             port=3307,
-            password="password@root",
+            password="your_password",
             database="student_management"
         )
         
