@@ -53,3 +53,18 @@ class StudentManager:
             return False 
         self.database.delete_student(usn)
         return True
+
+    def total_students(self):
+        return self.database.get_total_students()
+        
+
+    def average_attendance(self):
+        return self.database.get_average_attendance()
+
+
+    def low_attendance_count(self):
+        return self.database.get_low_attendance_count()
+
+
+    def pending_assignments(self):
+        return self.database.get_pending_assignments()

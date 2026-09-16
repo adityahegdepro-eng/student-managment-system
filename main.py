@@ -14,7 +14,8 @@ while True:
     print("3.show all students")
     print("4.update student")
     print("5.delete student")
-    print("6.exit")
+    print("6.total number of students")
+    print("7.exit")
     choice=int(input("enter your choice(must be an integer (1-4)):"))
     if choice==1:
         usn=input("enter usn:")
@@ -55,5 +56,8 @@ while True:
         manager.delete_student(usn)
         
     elif choice==6:
+        print("total number of students are",manager.total_students())
+
+    elif choice==7:
         db.close()
         break

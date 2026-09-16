@@ -63,3 +63,29 @@ class DatabaseManager:
     def close(self):
         self.cursor.close()
         self.connection.close()
+
+    def get_total_students(self):
+        query="SELECT count(*) FROM student"
+        self.cursor.execute(query)
+        total =self.cursor.fetchone()[0]
+        return total
+
+    def get_average_attendance(self):
+        query = "SELECT AVG(attended) FROM student"
+        self.cursor.execute(query)
+        average = self.cursor.fetchone()[0]
+        return average
+
+
+    def get_low_attendance_count(self):
+        query = "SELECT COUNT(*) FROM student WHERE attended < 16"
+        self.cursor.execute(query)
+        count = self.cursor.fetchone()[0]
+        return count
+
+
+    def get_pending_assignments(self):
+        query = "SELECT COUNT(*) FROM student WHERE assignment_status = %s"
+        self.cursor.execute(query, ("pending",))
+        count = self.cursor.fetchone()[0]
+        return count

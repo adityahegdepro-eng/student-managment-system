@@ -6,9 +6,44 @@ from database import DatabaseManager
 db=DatabaseManager()
 manager=StudentManager(db)
 
+st.title("Student Management System")
+st.subheader("Dashboard")
 
-st.title("🧑‍🎓 student management system")
-st.write("welcome to student management system")
+total_students = manager.total_students()
+average_attendance = manager.average_attendance()
+low_attendance = manager.low_attendance_count()
+pending_assignments = manager.pending_assignments()
+
+col1, col2, col3, col4 = st.columns(4)
+
+with col1:
+    st.metric("Total Students", total_students)
+
+with col2:
+    if average_attendance is not None:
+        st.metric("Average Attendance", f"{average_attendance:.1f}")
+    else:
+        st.metric("Average Attendance", "0")
+
+with col3:
+    st.metric("Below 75%", low_attendance)
+
+with col4:
+    st.metric("Pending Assignments", pending_assignments)
+
+
+st.subheader("Student Overview")
+
+students = manager.show_all_students()
+
+if students:
+    data = [student.to_dict() for student in students]
+    st.dataframe(data, use_container_width=True)
+else:
+    st.info("No students found.")
+
+
+
 
 st.header("ADD STUDENT")
 usn=st.text_input("enter new student usn",key="add_usn")
