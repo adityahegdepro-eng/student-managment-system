@@ -5,11 +5,10 @@ class StudentManager:
         self.database=database
         
     
-    def add_student(self,student):
+    def add_student(self, student):
         if self.database.student_exist(student.usn):
-            print("usn exists")
-            return 
-        
+            return False
+
         self.database.insert_students(student)
         return True
 

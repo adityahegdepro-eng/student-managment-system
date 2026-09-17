@@ -5,3 +5,5 @@ __pycache__/
 .vscode/
 .idea/
 streamlit_notes
+fastapinotes.txt
+.env

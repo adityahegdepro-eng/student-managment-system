@@ -1,14 +1,18 @@
 import mysql.connector
+import os
+from dotenv import load_dotenv
+
+load_dotenv()
 
 class DatabaseManager:
     def __init__(self):
         self.connection = mysql.connector.connect(
-            host="localhost",
-            user="root",
-            port=3307,
-            password="your_password",
-            database="student_management"
-        )
+        host=os.getenv("DB_HOST"),
+        user=os.getenv("DB_USER"),
+        port=int(os.getenv("DB_PORT")),
+        password=os.getenv("DB_PASSWORD"),
+        database=os.getenv("DB_NAME")
+    )
         
         self.cursor = self.connection.cursor(buffered=True)
 
